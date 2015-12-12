@@ -1,4 +1,4 @@
-import MRAA
+import mraa
 import time
 
 x = mraa.I2c(1)
