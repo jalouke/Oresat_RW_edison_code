@@ -1,7 +1,7 @@
 import MRAA
 import time
 
-x = mraa.i2c(1)
+x = mraa.I2c(1)
 gyro_address = 0x6B
 mag_acc_address = 0x1D
 x.address(gyro_address)
