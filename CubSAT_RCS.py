@@ -3,20 +3,19 @@ import time
 import math
 import mraa
 from IMU import IMU_read
-Ain1=Bin1=Cin1=Din1=Ain2=Bin2=Cin2=Din2=0
-Motors1 = [Ain1,Bin1,Cin1,Din1]
-Motors2 = [Ain2,Bin2,Cin2,Din2]
-PWM = [14,20,0,21] #PWM for GP13,GP12,GP182,GP183
-Gpio = [36,48,47,33,46] #Gpio for GP14,GP15,GP49,GP48,GP47
-for x in xrange(5):
-	Motors1[x] = mraa.Pwm(PWM[x])
-	Motors1[x].period_us(700)
-	Motors1[x].enable(True)
-	print Motors1[x]
+Ain1=Bin1=Cin1=Din1=Ain2=Bin2=Cin2=Din2=mode=0
+output = [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode]
+Pin = [14,20,0,21,36,48,47,33,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
 
-	Motors2[x] = mraa.Gpio(Gpio[x])
-	print Motors2[x]
-	Motors2[x].dir(mraa.DIR_OUT)
+for x in xrange(0,3):
+	output[x] = mraa.Pwm(Pin[x])
+	output[x].period_us(700)
+	output[x].enable(True)
+	print output[x]
+for x in xrange(4,8):
+	output[x] = mraa.Gpio(Pin[x])
+	output[x].dir(mraa.DIR_OUT)
+	print output[x]
 	
 PWM_A = 0.0
 PWM_B = 0.0
