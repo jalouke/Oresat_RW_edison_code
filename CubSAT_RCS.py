@@ -16,6 +16,8 @@ for x in xrange(4,9):
 	output[x] = mraa.Gpio(Pin[x])
 	output[x].dir(mraa.DIR_OUT)
 	print x,output[x]
+
+output[9].write(1) #Set Mode to high
 	
 PWM_A = 0.0
 PWM_B = 0.0
