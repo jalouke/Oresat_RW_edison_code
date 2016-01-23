@@ -3,7 +3,7 @@ import time
 import math
 import mraa
 from IMU import IMU_read
-Ain1=Bin1=Cin1=Din1=Ain2=Bin2=Cin2=Din2=mode=0
+Apwm=Bpwm=Cpwm=Dpwm=Adir=Bdir=Cdir=Ddir=mode=0
 output = [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode]
 Pin = [14,20,0,21,36,48,47,33,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
 
