@@ -6,9 +6,9 @@ from IMU import IMU_read
 Ain1=Bin1=Cin1=Din1=Ain2=Bin2=Cin2=Din2=0
 Motors1 = [Ain1,Bin1,Cin1,Din1]
 Motors2 = [Ain2,Bin2,Cin2,Din2]
-PWM = [14,20,0,21] #PWM for GP13,GP12,GP102,GP103
-Gpio = [45,46,47,36] #Gpio for GP45,GP47,GP49,GP14
-for x in xrange(4):
+PWM = [14,20,0,21] #PWM for GP13,GP12,GP182,GP183
+Gpio = [36,48,47,33,46] #Gpio for GP14,GP15,GP49,GP48,GP47
+for x in xrange(5):
 	Motors1[x] = mraa.Pwm(PWM[x])
 	Motors1[x].period_us(700)
 	Motors1[x].enable(True)
