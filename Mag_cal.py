@@ -5,8 +5,7 @@ import math
 from LSM9DS0 import *
 
 bus = smbus.SMBus(1)
-RAD_TO_DEG = 57.29578
-M_PI = 3.14159265358979323846
+
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)
@@ -14,12 +13,6 @@ GYRx_offset = 0 #3.4251
 GYRy_offset = 0 #-1.6323
 GYRz_offset = 0 #-10.2034
 timestart = time.time()
-MAGx_bias = -18.0000
-MAGx_scale = 1.0578
-MAGy_bias = 61.4400
-MAGy_scale = 1.0991
-MAGz_bias = -126.2400
-MAGz_scale = 0.8736
 
 def writeACC(register,value):
         bus.write_byte_data(ACC_ADDRESS , register, value)
@@ -111,38 +104,37 @@ writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled
 writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
 
-#def IMU_read():
-while True:
-	a = time.time()
-	ACCx = LA_So*readACCx()
-	ACCy = LA_So*readACCy()
-	ACCz = LA_So*readACCz()
-	GYRx = G_So*readGYRx() - GYRx_offset
-	GYRy = G_So*readGYRy() - GYRy_offset
-	GYRz = G_So*readGYRz() - GYRz_offset
-	MAGx = M_GN*(MAGx_scale * readMAGx()) + MAGx_bias
-	MAGy = M_GN*(MAGy_scale * readMAGy()) + MAGy_bias
-	MAGz = M_GN*(MAGz_scale * readMAGz()) + MAGz_bias
-
-	AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
-	AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG	
-
-	#Calculate heading
-	heading = 180 * math.atan2(MAGy,MAGx)/M_PI
-
-	if heading < 0:
-	 	heading += 360
-
-	b = time.time()
-        LoopTime = b - a
-#        print ("\033[1;34;40mAcceleration Values:")
-#        print ("\033[1;34;40mACCX %5.4f, ACCy %5.4f, ACCz %5.4f" % (ACCx, ACCy, ACCz))
-#        print ("\033[1;31;40mGyro Values:")
-#        print ("\033[1;31;40mGYRx %5.2f, GYRy %5.2f, GYRz %5.2f" % (GYRx, GYRy, GYRz))
-#        print ("\033[1;35;40mMagnetometer values:")
-#        print ("\033[1;35;40mMAGx %5.2f, MAGy %5.2f, MAGz %5.2f" % (MAGx, MAGy, MAGz))	
-	print ("\033[1;34;40mAcceleration angles:")
-	print ("\033[1;34;40m AccXangle= %5.2f, AccYangle= %5.2f" % (AccXangle,AccYangle))
-	print ("\033[1;34;40m Heading angles:")
-	print ("\033[1;34;40m Heading= %5.2f") % (heading)
-        time.sleep(0.3)
+MAGx_max=MAGy_max=MAGz_max=0
+MAGx_min=MAGy_min=MAGz_min=0
+print "calibrating 3..."
+time.sleep(1)
+print "calibrating 2..."
+time.sleep(1)
+print "calibrating 1..."
+time.sleep(1)
+start=time.time()
+timer=0
+while timer<10:
+	MAGx = M_GN*readMAGx()
+	MAGy = M_GN*readMAGy()
+	MAGz = M_GN*readMAGz()
+	if MAGx > MAGx_max : MAGx_max = MAGx 
+	if MAGx < MAGx_min : MAGx_min = MAGx
+	if MAGy > MAGy_max : MAGy_max = MAGy
+	if MAGy < MAGy_min : MAGy_min = MAGy
+	if MAGz > MAGz_max : MAGz_max = MAGz
+	if MAGz < MAGz_min : MAGz_min = MAGz
+	timer=time.time()-start
+MAGx_bias  = (MAGx_max + MAGx_min)/2
+MAGy_bias  = (MAGy_max + MAGy_min)/2
+MAGz_bias  = (MAGz_max + MAGz_min)/2
+MAGx_scalea = (MAGx_max - MAGx_min)/2
+MAGy_scalea = (MAGy_max - MAGy_min)/2
+MAGz_scalea = (MAGz_max - MAGz_min)/2
+avg_scale = (MAGx_scalea+MAGy_scalea+MAGz_scalea)/3
+MAGx_scale = avg_scale/MAGx_scalea
+MAGy_scale = avg_scale/MAGy_scalea
+MAGz_scale = avg_scale/MAGz_scalea
+print "MAGx bias = %3.4f, MAGx scale = %3.4f" % (MAGx_bias,MAGx_scale)
+print "MAGy bias = %3.4f, MAGy scale = %3.4f" % (MAGy_bias,MAGy_scale)
+print "MAGz bias = %3.4f, MAGz scale = %3.4f" % (MAGz_bias,MAGz_scale)
