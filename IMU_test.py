@@ -7,8 +7,8 @@ RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
 while True:
         a = time.time()
-        IMU_val = IMU.read()
-        print IMU_val
+        [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
+        
         
         AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
         AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG	
