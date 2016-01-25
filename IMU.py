@@ -5,8 +5,6 @@ import math
 from LSM9DS0 import *
 
 bus = smbus.SMBus(1)
-RAD_TO_DEG = 57.29578
-M_PI = 3.14159265358979323846
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)

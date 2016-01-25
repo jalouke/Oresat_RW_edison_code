@@ -3,7 +3,8 @@ import time
 import math
 import IMU
 ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
-temp = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
+RAD_TO_DEG = 57.29578
+M_PI = 3.14159265358979323846
 while True:
         a = time.time()
         IMU_val = IMU.read()
