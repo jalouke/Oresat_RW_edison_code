@@ -7,6 +7,7 @@ ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
 temp = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
 while True:
         IMU_val = IMU.read()
+        print IMU_val
         for x in xrange(9):
                 temp[x] = IMU_val[x]
         AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
