@@ -1,14 +1,14 @@
 #import smbus
 import time
 import math
-from IMU import *
+import IMU
 ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
 temp = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
 while True:
+        a = time.time()
         IMU_val = read()
         print IMU_val
-        for x in xrange(9):
-                temp[x] = IMU_val[x]
+        
         AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
         AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG	
 
