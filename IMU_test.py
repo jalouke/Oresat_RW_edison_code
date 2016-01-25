@@ -1,7 +1,7 @@
 #import smbus
 import time
 import math
-import IMU as IMU()
+import IMU as IMU
 IMU.IMU()
 ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
 temp = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
