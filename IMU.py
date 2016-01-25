@@ -113,12 +113,13 @@ writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
 
 def read():
 	a = time.time()
-	global ACCx = LA_So*readACCx()
-	global ACCy = LA_So*readACCy()
-	global ACCz = LA_So*readACCz()
-	global GYRx = G_So*readGYRx() - GYRx_offset
-	global GYRy = G_So*readGYRy() - GYRy_offset
-	global GYRz = G_So*readGYRz() - GYRz_offset
-	global MAGx = M_GN*(MAGx_scale * readMAGx()) + MAGx_bias
-	global MAGy = M_GN*(MAGy_scale * readMAGy()) + MAGy_bias
-	global MAGz = M_GN*(MAGz_scale * readMAGz()) + MAGz_bias
+	global ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz
+	ACCx = LA_So*readACCx()
+	ACCy = LA_So*readACCy()
+	ACCz = LA_So*readACCz()
+	GYRx = G_So*readGYRx() - GYRx_offset
+	GYRy = G_So*readGYRy() - GYRy_offset
+	GYRz = G_So*readGYRz() - GYRz_offset
+	MAGx = M_GN*(MAGx_scale * readMAGx()) + MAGx_bias
+	MAGy = M_GN*(MAGy_scale * readMAGy()) + MAGy_bias
+	MAGz = M_GN*(MAGz_scale * readMAGz()) + MAGz_bias
