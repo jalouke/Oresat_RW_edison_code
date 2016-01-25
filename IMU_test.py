@@ -5,7 +5,7 @@ from IMU import *
 ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
 temp = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
 while True:
-        IMU_val = IMU.read()
+        IMU_val = read()
         print IMU_val
         for x in xrange(9):
                 temp[x] = IMU_val[x]
