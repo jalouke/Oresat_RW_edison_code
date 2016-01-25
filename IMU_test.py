@@ -1,7 +1,7 @@
 #import smbus
 import time
 import math
-import IMU.py
+import IMU
 
 
 
