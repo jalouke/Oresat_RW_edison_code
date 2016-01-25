@@ -123,3 +123,5 @@ def read():
 	MAGx = M_GN*(MAGx_scale * readMAGx()) + MAGx_bias
 	MAGy = M_GN*(MAGy_scale * readMAGy()) + MAGy_bias
 	MAGz = M_GN*(MAGz_scale * readMAGz()) + MAGz_bias
+        IMU_val = [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz]
+        return IMU_val
