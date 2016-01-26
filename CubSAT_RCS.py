@@ -38,6 +38,23 @@ def ramp():
                 output[3].write(x)
                 time.sleep(.1)
                 x-=.05
+def jerk():
+        x=1
+        while x >= 0:
+                output[0].write(x)
+                output[1].write(x)
+                output[2].write(x)
+                output[3].write(x)
+                time.sleep(.01)
+                x-=.125
+        while x <= 1:
+                output[0].write(x)
+                output[1].write(x)
+                output[2].write(x)
+                output[3].write(x)
+                time.sleep(.01)
+                x+=.125
+        
 
         
 
@@ -72,6 +89,36 @@ while True:
         output[Cdir].write(1)
         output[Ddir].write(0)
         ramp()
+        output[Adir].write(1)
+        output[Bdir].write(1)
+        output[Cdir].write(1)
+        output[Ddir].write(1)
+        jerk()
+        output[Adir].write(0)
+        output[Bdir].write(0)
+        output[Cdir].write(0)
+        output[Ddir].write(0)
+        jerk()
+        output[Adir].write(1)
+        output[Bdir].write(1)
+        output[Cdir].write(0)
+        output[Ddir].write(0)
+        jerk()
+        output[Adir].write(0)
+        output[Bdir].write(0)
+        output[Cdir].write(1)
+        output[Ddir].write(1)
+        jerk()
+        output[Adir].write(0)
+        output[Bdir].write(1)
+        output[Cdir].write(0)
+        output[Ddir].write(1)
+        jerk()
+        output[Adir].write(1)
+        output[Bdir].write(0)
+        output[Cdir].write(1)
+        output[Ddir].write(0)
+        jerk()
 ##        a = time.time()
 ##        [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
 ##        
