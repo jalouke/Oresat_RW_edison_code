@@ -23,36 +23,32 @@ for x in xrange(4,9):
 output[8].write(1) #Set Mode to high
 
 def ramp():
-        for x in np.arange(0,1,.05):
+        x=0
+        while x <= 1:
                 output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
                 time.sleep(.1)
-        for x in np.arange(1,0,.05):
+                x+=.05
+        while x >= 0:
                 output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
                 time.sleep(.1)
-        for x in xrange(4,8):
-                output[x].write(0)
-        for x in np.arange(0,1,.05):
-                output[0].write(x)
-                output[1].write(x)
-                output[2].write(x)
-                output[3].write(x)
-                time.sleep(.1)
-        for x in np.arange(1,0,.05):
-                output[0].write(x)
-                output[1].write(x)
-                output[2].write(x)
-                output[3].write(x)
-                time.sleep(.1)
+                x-=.05
+
+        
 
 while True:
         output[Adir].write(1)
         output[Bdir].write(1)
+        output[Cdir].write(1)
+        output[Ddir].write(1)
+        ramp()
+        output[Adir].write(0)
+        output[Bdir].write(0)
         output[Cdir].write(0)
         output[Ddir].write(0)
         ramp()
@@ -60,6 +56,16 @@ while True:
         output[Bdir].write(1)
         output[Cdir].write(0)
         output[Ddir].write(0)
+        ramp()
+        output[Adir].write(0)
+        output[Bdir].write(0)
+        output[Cdir].write(1)
+        output[Ddir].write(1)
+        ramp()
+        output[Adir].write(0)
+        output[Bdir].write(1)
+        output[Cdir].write(0)
+        output[Ddir].write(1)
         ramp()
         output[Adir].write(1)
         output[Bdir].write(0)
