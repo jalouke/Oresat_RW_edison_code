@@ -28,13 +28,13 @@ def ramp():
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.01)
+                time.sleep(.1)
         for x in np.arange(1,0,.05):
                 output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.01)
+                time.sleep(.1)
         for x in xrange(4,8):
                 output[x].write(0)
         for x in np.arange(0,1,.05):
@@ -42,13 +42,13 @@ def ramp():
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.01)
+                time.sleep(.1)
         for x in np.arange(1,0,.05):
                 output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.01)
+                time.sleep(.1)
 
 while True:
         output[Adir].write(1)
