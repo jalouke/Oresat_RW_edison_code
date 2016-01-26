@@ -10,7 +10,7 @@ while True:
         
         
         AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
-        AccYangle =  (math.atan2(ACCz,ACCx))*RAD_TO_DEG	
+        AccYangle =  (math.atan2(ACCz,ACCx)+M_PI/2)*RAD_TO_DEG	
 
         #Calculate heading
         heading = 180 * math.atan2(MAGy,MAGx)/M_PI
