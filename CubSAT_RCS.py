@@ -21,7 +21,7 @@ for x in xrange(4,9):
 
 output[9].write(1) #Set Mode to high
 
-def ramp()
+def ramp():
         for x in xrange(0,1,.05):
                 Apwm.write(x)
                 Bpwm.write(x)
