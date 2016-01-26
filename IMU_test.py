@@ -2,7 +2,6 @@
 import time
 import math
 import IMU
-ACCx=ACCy=ACCz=GYRx=GYRy=GYRz=MAGx=MAGy=MAGz=0
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
 while True:
@@ -11,7 +10,7 @@ while True:
         
         
         AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
-        AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG	
+        AccYangle =  (math.atan2(ACCx,ACCz)+M_PI)*RAD_TO_DEG	
 
         #Calculate heading
         heading = 180 * math.atan2(MAGy,MAGx)/M_PI
