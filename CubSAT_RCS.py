@@ -50,7 +50,7 @@ def jerk():
         output[1].write(x)
         output[2].write(x)
         output[3].write(x)
-        time.sleep(.1)
+        time.sleep(2)
        
 
         
@@ -76,13 +76,13 @@ while True:
         output[6].write(1)
         output[7].write(1)
         jerk()
-        output[4].write(1)
-        output[5].write(0)
+        output[4].write(0)
+        output[5].write(1)
         output[6].write(1)
         output[7].write(0)
         jerk()
-        output[4].write(0)
-        output[5].write(1)
+        output[4].write(1)
+        output[5].write(0)
         output[6].write(0)
         output[7].write(1)
         jerk()
