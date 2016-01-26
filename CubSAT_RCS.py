@@ -1,7 +1,8 @@
 import smbus
 import mraa 
 import time 
-import math 
+import math
+import numpy as np
 import IMU
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -22,13 +23,13 @@ for x in xrange(4,9):
 output[8].write(1) #Set Mode to high
 
 def ramp():
-        for x in xrange(0,1,.05):
+        for x in np.arange(0,1,.05):
                 Apwm.write(x)
                 Bpwm.write(x)
                 Cpwm.write(x)
                 Dpwm.write(x)
                 time.sleep(.01)
-        for x in xrange(1,0,.05):
+        for x in np.arange(1,0,.05):
                 Apwm.write(x)
                 Bpwm.write(x)
                 Cpwm.write(x)
@@ -36,13 +37,13 @@ def ramp():
                 time.sleep(.01)
         for x in xrange(4,8):
                 output[x].write(0)
-        for x in xrange(0,1,.05):
+        for x in np.arange(0,1,.05):
                 Apwm.write(x)
                 Bpwm.write(x)
                 Cpwm.write(x)
                 Dpwm.write(x)
                 time.sleep(.01)
-        for x in xrange(1,0,.05):
+        for x in np.arange(1,0,.05):
                 Apwm.write(x)
                 Bpwm.write(x)
                 Cpwm.write(x)
