@@ -19,7 +19,7 @@ for x in xrange(4,9):
 	output[x].dir(mraa.DIR_OUT)
 	print x,output[x]
 
-output[9].write(1) #Set Mode to high
+output[8].write(1) #Set Mode to high
 
 def ramp():
         for x in xrange(0,1,.05):
