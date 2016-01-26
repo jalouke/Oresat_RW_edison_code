@@ -49,7 +49,7 @@ def ramp():
                 Dpwm.write(x)
                 time.sleep(.01)
 
-while true:
+while True:
         output[Adir].write(1)
         output[Bdir].write(1)
         output[Cdir].write(0)
