@@ -40,21 +40,13 @@ def ramp():
                 x-=.05
 def jerk():
         x=1
-        while x >= 0:
-                output[0].write(x)
-                output[1].write(x)
-                output[2].write(x)
-                output[3].write(x)
-                time.sleep(.01)
-                x-=.125
-        while x <= 1:
-                output[0].write(x)
-                output[1].write(x)
-                output[2].write(x)
-                output[3].write(x)
-                time.sleep(.01)
-                x+=.125
+        output[0].write(x)
+        output[1].write(x)
+        output[2].write(x)
+        output[3].write(x)
+        time.sleep(2)
         
+       
 
         
 
