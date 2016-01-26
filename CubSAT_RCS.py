@@ -1,8 +1,10 @@
-import smbus 
+import smbus
+import mraa 
 import time 
 import math 
-import mraa 
-from IMU import IMU_read 
+import IMU
+RAD_TO_DEG = 57.29578
+M_PI = 3.14159265358979323846
 Apwm=Bpwm=Cpwm=Dpwm=Adir=Bdir=Cdir=Ddir=mode=0 
 output = [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode] 
 Pin = [14,20,0,21,36,48,47,33,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
@@ -18,11 +20,64 @@ for x in xrange(4,9):
 	print x,output[x]
 
 output[9].write(1) #Set Mode to high
-	
-PWM_A = 0.0
-PWM_B = 0.0
-PWM_C = 0.0
-PWM_D = 0.0
 
+def ramp()
+        for x in xrange(0,1,.05):
+                Apwm.write(x)
+                Bpwm.write(x)
+                Cpwm.write(x)
+                Dpwm.write(x)
+                time.sleep(.01)
+        for x in xrange(1,0,.05):
+                Apwm.write(x)
+                Bpwm.write(x)
+                Cpwm.write(x)
+                Dpwm.write(x)
+                time.sleep(.01)
+        for x in xrange(4,8):
+                output[x].write(0)
+        for x in xrange(0,1,.05):
+                Apwm.write(x)
+                Bpwm.write(x)
+                Cpwm.write(x)
+                Dpwm.write(x)
+                time.sleep(.01)
+        for x in xrange(1,0,.05):
+                Apwm.write(x)
+                Bpwm.write(x)
+                Cpwm.write(x)
+                Dpwm.write(x)
+                time.sleep(.01)
 
-
+while true:
+        output[Adir].write(1)
+        output[Bdir].write(1)
+        output[Cdir].write(0)
+        output[Ddir].write(0)
+        ramp()
+        output[Adir].write(1)
+        output[Bdir].write(1)
+        output[Cdir].write(0)
+        output[Ddir].write(0)
+        ramp()
+        output[Adir].write(1)
+        output[Bdir].write(0)
+        output[Cdir].write(1)
+        output[Ddir].write(0)
+        ramp()
+##        a = time.time()
+##        [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
+##        
+##        
+##        AccXangle =  (math.atan2(ACCy,ACCz)+M_PI)*RAD_TO_DEG
+##        AccYangle =  (math.atan2(ACCz,ACCx)+M_PI/2)*RAD_TO_DEG	
+##
+##        #Calculate heading
+##        heading = 180 * math.atan2(MAGy,MAGx)/M_PI
+##
+##        if heading < 0:
+##                heading += 360
+##        
+##        b = time.time()
+##        LoopTime = b - a
+        
