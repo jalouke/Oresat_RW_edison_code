@@ -24,30 +24,30 @@ output[8].write(1) #Set Mode to high
 
 def ramp():
         for x in np.arange(0,1,.05):
+                output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                output[4].write(x)
                 time.sleep(.01)
         for x in np.arange(1,0,.05):
+                output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                output[4].write(x)
                 time.sleep(.01)
         for x in xrange(4,8):
                 output[x].write(0)
         for x in np.arange(0,1,.05):
+                output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                output[4].write(x)
                 time.sleep(.01)
         for x in np.arange(1,0,.05):
+                output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                output[4].write(x)
                 time.sleep(.01)
 
 while True:
