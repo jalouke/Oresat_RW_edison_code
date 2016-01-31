@@ -35,6 +35,7 @@ def rampup():
                 print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
         time.sleep(1)
 def rampdown():
+        x=1
         while x >= 0:
                 output[0].write(x)
                 output[1].write(x)
