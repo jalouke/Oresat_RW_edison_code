@@ -29,15 +29,19 @@ def ramp():
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.1)
+                time.sleep(.05)
                 x+=.05
+                [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
+                print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
         while x >= 0:
                 output[0].write(x)
                 output[1].write(x)
                 output[2].write(x)
                 output[3].write(x)
-                time.sleep(.1)
+                time.sleep(.05)
                 x-=.05
+                [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
+                print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
 def jerk():
         output[0].write(x)
         output[1].write(x)
@@ -60,40 +64,40 @@ while True:
         output[6].write(1)
         output[7].write(1)
         x=1
-        jerk()
+        ramp()
         output[4].write(0)
         output[5].write(0)
         output[6].write(0)
         output[7].write(0)
         time.sleep(2)
-        x=0
-        jerk()
-        output[4].write(1)
-        output[5].write(1)
-        output[6].write(0)
-        output[7].write(0)
-        x=1
-        jerk()
-        output[4].write(0)
-        output[5].write(0)
-        output[6].write(1)
-        output[7].write(1)
-        time.sleep(2)
-        x=0
-        jerk()
-        output[4].write(0)
-        output[5].write(1)
-        output[6].write(1)
-        output[7].write(0)
-        x=1
-        jerk()
-        output[4].write(1)
-        output[5].write(0)
-        output[6].write(0)
-        output[7].write(1)
-        time.sleep(2)
-        x=0
-        jerk()
+##        x=0
+##        ramp()
+##        output[4].write(1)
+##        output[5].write(1)
+##        output[6].write(0)
+##        output[7].write(0)
+##        x=1
+##        ramp()
+##        output[4].write(0)
+##        output[5].write(0)
+##        output[6].write(1)
+##        output[7].write(1)
+##        time.sleep(2)
+##        x=0
+##        ramp()
+##        output[4].write(0)
+##        output[5].write(1)
+##        output[6].write(1)
+##        output[7].write(0)
+##        x=1
+##        ramp()
+##        output[4].write(1)
+##        output[5].write(0)
+##        output[6].write(0)
+##        output[7].write(1)
+##        time.sleep(2)
+##        x=0
+##        ramp()
 ##        a = time.time()
 ##        [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
 ##        
@@ -109,4 +113,5 @@ while True:
 ##        
 ##        b = time.time()
 ##        LoopTime = b - a
+##        print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
         
