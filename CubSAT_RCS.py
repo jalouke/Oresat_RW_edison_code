@@ -22,7 +22,7 @@ for x in xrange(4,9):
 
 output[8].write(1) #Set Mode to high
 
-def ramp():
+def rampup():
         x=0
         while x <= 1:
                 output[0].write(x)
@@ -33,6 +33,8 @@ def ramp():
                 x+=.05
                 [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
                 print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
+        time.sleep(1)
+def ramdown()
         while x >= 0:
                 output[0].write(x)
                 output[1].write(x)
@@ -42,6 +44,7 @@ def ramp():
                 x-=.05
                 [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
                 print "GYRx: %3.2f, GYRy: %3.2f,GYRz: %3.2f" %(GYRx,GYRy,GYRz)
+        time.sleep(1)
 def jerk():
         output[0].write(x)
         output[1].write(x)
@@ -63,12 +66,15 @@ while True:
         output[5].write(1)
         output[6].write(1)
         output[7].write(1)
-        x=1
-        ramp()
+        rampup()
+        rampdown()
+        
         output[4].write(0)
         output[5].write(0)
         output[6].write(0)
         output[7].write(0)
+        rampup()
+        rampdown()
         time.sleep(2)
 ##        x=0
 ##        ramp()
