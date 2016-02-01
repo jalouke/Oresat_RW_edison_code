@@ -38,52 +38,52 @@ def gyroread():
                 b = time.time()
                 c = b - a
 def A_motor_dir():
-         if A_motor_velocity > 0:
+        if A_motor_velocity > 0:
                  A_motor_dir = 1
                  A_motor_speed = abs(A_motor_velocity)/100
                  if A_motor_speed > 1:
                          A_motor_speed = 1
 
-         elif A_motor_velocity < 0:
+        elif A_motor_velocity < 0:
                  A_motor_dir = 0
                  A_motor_speed = abs(A_motor_velocity)/100
                  if A_motor_speed > 1:
                          A_motor_speed = 1
-         Adir.write(A_motor_dir)
+        Adir.write(A_motor_dir)
 def B_motor_dir():
-         if B_motor_velocity > 0:
+        if B_motor_velocity > 0:
                  B_motor_dir = 1
                  B_motor_speed = abs(B_motor_velocity)/100
                  if B_motor_speed > 1:
                          B_motor_speed = 1
 
-         elif B_motor_velocity < 0:
+        elif B_motor_velocity < 0:
                  B_motor_dir = 0
                  B_motor_speed = abs(B_motor_velocity)/100
                  if B_motor_speed > 1:
                          B_motor_speed = 1
         Bdir.write(B_motor_dir)
 def C_motor_dir():
-         if C_motor_velocity > 0:
+        if C_motor_velocity > 0:
                  C_motor_dir = 1
                  C_motor_speed = abs(C_motor_velocity)/100
                  if C_motor_speed > 1:
                          C_motor_speed = 1
 
-         elif C_motor_velocity < 0:
+        elif C_motor_velocity < 0:
                  C_motor_dir = 0
                  C_motor_speed = abs(C_motor_velocity)/100
                  if C_motor_speed > 1:
                          C_motor_speed = 1
         Cdir.write(C_motor_dir)
 def D_motor_dir():
-         if D_motor_velocity > 0:
+        if D_motor_velocity > 0:
                  D_motor_dir = 1
                  D_motor_speed = abs(D_motor_velocity)/100
                  if D_motor_speed > 1:
                          D_motor_speed = 1
 
-         elif D_motor_velocity < 0:
+        elif D_motor_velocity < 0:
                  D_motor_dir = 0
                  D_motor_speed = abs(D_motor_velocity)/100
                  if D_motor_speed > 1:
