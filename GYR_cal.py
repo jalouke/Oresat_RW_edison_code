@@ -9,9 +9,9 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)
-GYRx_offset = -0.24 
-GYRy_offset = -6.72
-GYRz_offset = -0.24
+GYRx_bias = -1
+GYRy_bias = -14
+GYRz_bias = -1
 timestart = time.time()
 
 def writeACC(register,value):
@@ -115,9 +115,9 @@ time.sleep(1)
 start=time.time()
 timer=0
 while timer<10:
-	GYRx = readGYRx()
-	GYRy = readGYRy()
-	GYRz = readGYRz()
+	GYRx = readGYRx()- GYRx_bias
+	GYRy = readGYRy()- GYRy_bias
+	GYRz = readGYRz()- GYRz_bias
 	if GYRx > GYRx_max : GYRx_max = GYRx 
 	if GYRx < GYRx_min : GYRx_min = GYRx
 	if GYRy > GYRy_max : GYRy_max = GYRy
