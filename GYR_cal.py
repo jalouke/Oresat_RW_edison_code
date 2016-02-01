@@ -126,8 +126,9 @@ cutoff = 5  # desired cutoff frequency of the filter, Hz
 
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
-timer=0
+timer=t_tot=0
 while timer<15:
+        a=time.time()
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
@@ -141,10 +142,16 @@ while timer<15:
 	bias_totz += GYRz
 	count+=1
 	timer=time.time()-start
+	b=time.time()
+	t = b-a
+	t_tot+=t
+	
         
 biasx = bias_totx/count
 biasy = bias_toty/count
 biasz = bias_totz/count
+avg_t = t_tot/count
 print "GYRx bias = %3.1f" % (biasx)
 print "GYRy bias = %3.1f" % (biasy)
 print "GYRz bias = %3.1f" % (biasz)
+print "average lp time = %1.5f" % (avg_t)
