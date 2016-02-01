@@ -7,7 +7,7 @@ import IMU
 
 ##################################################
 # initializing Variables
-global A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity
+
 A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
 A=B=C=D=E=F=G=H=I=0
 P = 2.5 # proportional control value
@@ -90,17 +90,18 @@ def D_motor_dir():
                          D_motor_speed = 1
         Ddir.write(D_motor_dir)
 def roll_control():
+        global A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
-
-        A_motor_dir()
-        B_motor_dir()
-        C_motor_dir()
-        D_motor_dir()
         
         A_motor_velocity = P*GYRz + A_motor_velocity
         B_motor_velocity = P*GYRz + B_motor_velocity
         C_motor_velocity = P*GYRz + C_motor_velocity
         D_motor_velocity = P*GYRz + D_motor_velocity
+        
+        A_motor_dir()
+        B_motor_dir()
+        C_motor_dir()
+        D_motor_dir()
         
         Apwm.write(A_motor_speed)
         Bpwm.write(B_motor_speed)
