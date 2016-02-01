@@ -74,21 +74,21 @@ def readGYRx():
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_X_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined  #if gyr_combined < 32768 else gyr_combined - 65536
   
 def readGYRy():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_Y_L_G)
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_Y_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined # if gyr_combined < 32768 else gyr_combined - 65536
 
 def readGYRz():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_Z_L_G)
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_Z_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined  #if gyr_combined < 32768 else gyr_combined - 65536
 
 	
 #initialise the accelerometer
@@ -120,7 +120,7 @@ while timer<15:
 	if GYRz > GYRz_max : GYRz_max = GYRz
 	if GYRz < GYRz_min : GYRz_min = GYRz
 	timer=time.time()-start
-	print "GYRx: %2.4f,GYRy: %2.4f,GYRz: %2.4f" %(GYRx,GYRy,GYRz)
+	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(GYRx,GYRy,GYRz)
 GYRx_bias  = (GYRx_max + GYRx_min)/2
 GYRy_bias  = (GYRy_max + GYRy_min)/2
 GYRz_bias  = (GYRz_max + GYRz_min)/2
@@ -131,6 +131,6 @@ avg_scale = (GYRx_scalea+GYRy_scalea+GYRz_scalea)/3
 GYRx_scale = avg_scale/GYRx_scalea
 GYRy_scale = avg_scale/GYRy_scalea
 GYRz_scale = avg_scale/GYRz_scalea
-print "GYRx bias = %3.4f, GYRx scale = %3.4f" % (GYRx_bias,GYRx_scale)
-print "GYRy bias = %3.4f, GYRy scale = %3.4f" % (GYRy_bias,GYRy_scale)
-print "GYRz bias = %3.4f, GYRz scale = %3.4f" % (GYRz_bias,GYRz_scale)
+print "GYRx bias = %3.1f, GYRx scale = %3.1f" % (GYRx_bias,GYRx_scale)
+print "GYRy bias = %3.1f, GYRy scale = %3.1f" % (GYRy_bias,GYRy_scale)
+print "GYRz bias = %3.1f, GYRz scale = %3.1f" % (GYRz_bias,GYRz_scale)
