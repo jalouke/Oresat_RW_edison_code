@@ -9,9 +9,9 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)
-GYRx_bias = 0
-GYRy_bias = 0
-GYRz_bias = 0
+GYRx_bias = 76
+GYRy_bias = -94
+GYRz_bias = -20
 timestart = time.time()
 
 def writeACC(register,value):
