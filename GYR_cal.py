@@ -105,32 +105,22 @@ writeGRY(CTRL_REG1_G, 0b11111111) #Normal power mode, all axes enabled (760 Hz 1
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 
-GYRx_max=GYRy_max=GYRz_max=0
-GYRx_min=GYRy_min=GYRz_min=0
+count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
 timer=0
 while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
-	if GYRx > GYRx_max : GYRx_max = GYRx 
-	if GYRx < GYRx_min : GYRx_min = GYRx
-	if GYRy > GYRy_max : GYRy_max = GYRy
-	if GYRy < GYRy_min : GYRy_min = GYRy
-	if GYRz > GYRz_max : GYRz_max = GYRz
-	if GYRz < GYRz_min : GYRz_min = GYRz
+	bias_totx += GYRx
+	bias_toty += GYRy
+	bias_totz += GYRz
+	count+=1
 	timer=time.time()-start
-	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(GYRx,GYRy,GYRz)
-GYRx_bias  = (GYRx_max + GYRx_min)/2
-GYRy_bias  = (GYRy_max + GYRy_min)/2
-GYRz_bias  = (GYRz_max + GYRz_min)/2
-GYRx_scalea = (GYRx_max - GYRx_min)/2
-GYRy_scalea = (GYRy_max - GYRy_min)/2
-GYRz_scalea = (GYRz_max - GYRz_min)/2
-avg_scale = (GYRx_scalea+GYRy_scalea+GYRz_scalea)/3
-GYRx_scale = avg_scale/GYRx_scalea
-GYRy_scale = avg_scale/GYRy_scalea
-GYRz_scale = avg_scale/GYRz_scalea
-print "GYRx bias = %3.1f, GYRx scale = %3.1f" % (GYRx_bias,GYRx_scale)
-print "GYRy bias = %3.1f, GYRy scale = %3.1f" % (GYRy_bias,GYRy_scale)
-print "GYRz bias = %3.1f, GYRz scale = %3.1f" % (GYRz_bias,GYRz_scale)
+        
+biasx = bias_totx/count
+biasy = bias_toty/count
+biasz = bias_totz/count
+print "GYRx bias = %3.1f" % (GYRx_bias)
+print "GYRy bias = %3.1f" % (GYRy_bias)
+print "GYRz bias = %3.1f" % (GYRz_bias)
