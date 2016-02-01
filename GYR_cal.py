@@ -104,8 +104,8 @@ writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled
 writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
 
-MAGx_max=MAGy_max=MAGz_max=0
-MAGx_min=MAGy_min=MAGz_min=0
+GYRx_max=GYRy_max=GYRz_max=0
+GYRx_min=GYRy_min=GYRz_min=0
 print "calibrating 3..."
 time.sleep(1)
 print "calibrating 2..."
