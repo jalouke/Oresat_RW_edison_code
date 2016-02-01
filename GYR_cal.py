@@ -9,9 +9,9 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)
-GYRx_offset = 0 #3.4251
-GYRy_offset = 0 #-1.6323
-GYRz_offset = 0 #-10.2034
+GYRx_offset = -0.24 
+GYRy_offset = -6.72
+GYRz_offset = -0.24
 timestart = time.time()
 
 def writeACC(register,value):
