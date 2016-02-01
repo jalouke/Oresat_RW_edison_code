@@ -8,7 +8,7 @@ bus = smbus.SMBus(1)
 
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
-G_So = 0.07 # dps/LSB (2000dps)
+G_So = 0.00875 # dps/LSB (2000dps)
 GYRx_bias = 76
 GYRy_bias = -94
 GYRz_bias = -20
@@ -112,7 +112,7 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
-	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(GYRx,GYRy,GYRz)
+	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(G_So*GYRx,G_So*GYRy,G_So*GYRz)
 
 	bias_totx += GYRx
 	bias_toty += GYRy
