@@ -2,6 +2,8 @@
 import smbus
 import time
 import math
+import numpy as np
+from scipy.signal import butter, lfilter, freqz
 from LSM9DS0 import *
 
 bus = smbus.SMBus(1)
@@ -101,9 +103,26 @@ writeMAG(CTRL_REG6_XM, 0b01100000) #+/-12gauss
 writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 
 #initialise the gyroscope
-writeGRY(CTRL_REG1_G, 0b11111111) #Normal power mode, all axes enabled (760 Hz 100 cutoff)
+writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12.5 cutoff)
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
+################################
+def butter_lowpass(cutoff, fs, order=5):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
+def butter_lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
+
+# Filter requirements.
+order = 6
+fs = 95       # sample rate, Hz
+cutoff = 5  # desired cutoff frequency of the filter, Hz
+######################################################
 
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
@@ -112,8 +131,11 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
+	GYRxf = butter_lowpass_filter(GYRx,cutoff,fs,order)
+	GYRyf = butter_lowpass_filter(GYRy,cutoff,fs,order)
+	GYRzf = butter_lowpass_filter(GYRz,cutoff,fs,order)
 	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(G_So*GYRx,G_So*GYRy,G_So*GYRz)
-
+        print "filteredx: %2.1f, filteredy: %2.1f, filteredz: %2.1f" %(G_So*GYRxf,G_So*GYRyf,G_So*GYRzf)
 	bias_totx += GYRx
 	bias_toty += GYRy
 	bias_totz += GYRz
