@@ -101,7 +101,8 @@ writeMAG(CTRL_REG6_XM, 0b01100000) #+/-12gauss
 writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 
 #initialise the gyroscope
-writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled
+writeGRY(CTRL_REG1_G, 0b10001111) #Normal power mode, all axes enabled
+writeGRY(CTRL_REG2_G, 0b10000001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
 
 GYRx_max=GYRy_max=GYRz_max=0
