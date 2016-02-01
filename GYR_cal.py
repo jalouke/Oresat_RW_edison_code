@@ -9,9 +9,9 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.07 # dps/LSB (2000dps)
-GYRx_bias = -1
-GYRy_bias = -14
-GYRz_bias = -1
+GYRx_bias = 0
+GYRy_bias = 0
+GYRz_bias = 0
 timestart = time.time()
 
 def writeACC(register,value):
@@ -123,6 +123,6 @@ while timer<15:
 biasx = bias_totx/count
 biasy = bias_toty/count
 biasz = bias_totz/count
-print "GYRx bias = %3.1f" % (GYRx_bias)
-print "GYRy bias = %3.1f" % (GYRy_bias)
-print "GYRz bias = %3.1f" % (GYRz_bias)
+print "GYRx bias = %3.1f" % (biasx)
+print "GYRy bias = %3.1f" % (biasy)
+print "GYRz bias = %3.1f" % (biasz)
