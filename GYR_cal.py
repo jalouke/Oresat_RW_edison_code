@@ -115,9 +115,9 @@ time.sleep(1)
 start=time.time()
 timer=0
 while timer<10:
-	GYRx = M_GN*readGYRx()
-	GYRy = M_GN*readGYRy()
-	GYRz = M_GN*readGYRz()
+	GYRx = readGYRx()
+	GYRy = readGYRy()
+	GYRz = readGYRz()
 	if GYRx > GYRx_max : GYRx_max = GYRx 
 	if GYRx < GYRx_min : GYRx_min = GYRx
 	if GYRy > GYRy_max : GYRy_max = GYRy
