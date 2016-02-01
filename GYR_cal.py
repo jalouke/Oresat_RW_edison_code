@@ -106,15 +106,9 @@ writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
 
 GYRx_max=GYRy_max=GYRz_max=0
 GYRx_min=GYRy_min=GYRz_min=0
-print "calibrating 3..."
-time.sleep(1)
-print "calibrating 2..."
-time.sleep(1)
-print "calibrating 1..."
-time.sleep(1)
 start=time.time()
 timer=0
-while timer<10:
+while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
@@ -125,6 +119,7 @@ while timer<10:
 	if GYRz > GYRz_max : GYRz_max = GYRz
 	if GYRz < GYRz_min : GYRz_min = GYRz
 	timer=time.time()-start
+	print "GYRx: %2.4f,GYRy: %2.4f,GYRz: %2.4f" %(GYRx,GYRy,GYRz)
 GYRx_bias  = (GYRx_max + GYRx_min)/2
 GYRy_bias  = (GYRy_max + GYRy_min)/2
 GYRz_bias  = (GYRz_max + GYRz_min)/2
