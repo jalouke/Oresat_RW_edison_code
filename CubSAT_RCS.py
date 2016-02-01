@@ -38,6 +38,7 @@ def gyroread():
                 b = time.time()
                 c = b - a
 def A_motor_dir():
+        global A_motor_speed
         if A_motor_velocity >= 0:
                  A_motor_dir = 1
                  A_motor_speed = abs(A_motor_velocity)/100
@@ -51,6 +52,7 @@ def A_motor_dir():
                          A_motor_speed = 1
         Adir.write(A_motor_dir)
 def B_motor_dir():
+        global B_motor_speed
         if B_motor_velocity >= 0:
                  B_motor_dir = 1
                  B_motor_speed = abs(B_motor_velocity)/100
@@ -64,6 +66,7 @@ def B_motor_dir():
                          B_motor_speed = 1
         Bdir.write(B_motor_dir)
 def C_motor_dir():
+        global C_motor_speed
         if C_motor_velocity >= 0:
                  C_motor_dir = 1
                  C_motor_speed = abs(C_motor_velocity)/100
@@ -77,6 +80,7 @@ def C_motor_dir():
                          C_motor_speed = 1
         Cdir.write(C_motor_dir)
 def D_motor_dir():
+        global D_motor_speed
         if D_motor_velocity >= 0:
                  D_motor_dir = 1
                  D_motor_speed = abs(D_motor_velocity)/100
