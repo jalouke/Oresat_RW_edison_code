@@ -8,7 +8,7 @@ import IMU
 ##################################################
 # initializing Variables
 global A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity
-
+A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
 A=B=C=D=E=F=G=H=I=0
 P = 2.5 # proportional control value
 timer = 1
