@@ -74,21 +74,21 @@ def readGYRx():
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_X_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined  #if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
   
 def readGYRy():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_Y_L_G)
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_Y_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined # if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
 
 def readGYRz():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_Z_L_G)
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_Z_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
-        return gyr_combined  #if gyr_combined < 32768 else gyr_combined - 65536
+        return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
 
 	
 #initialise the accelerometer
@@ -101,9 +101,9 @@ writeMAG(CTRL_REG6_XM, 0b01100000) #+/-12gauss
 writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 
 #initialise the gyroscope
-writeGRY(CTRL_REG1_G, 0b10001111) #Normal power mode, all axes enabled
-#writeGRY(CTRL_REG2_G, 0b10000001) #High-pass filter: Normal mode, 13.5 Hz
-writeGRY(CTRL_REG4_G, 0b00110000) #Continuos update, 2000 dps full scale
+writeGRY(CTRL_REG1_G, 0b11111111) #Normal power mode, all axes enabled (760 Hz 100 cutoff)
+writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
+writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 
 GYRx_max=GYRy_max=GYRz_max=0
 GYRx_min=GYRy_min=GYRz_min=0
