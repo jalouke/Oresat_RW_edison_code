@@ -112,6 +112,8 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
+	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(GYRx,GYRy,GYRz)
+
 	bias_totx += GYRx
 	bias_toty += GYRy
 	bias_totz += GYRz
