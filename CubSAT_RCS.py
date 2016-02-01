@@ -38,7 +38,7 @@ def gyroread():
                 b = time.time()
                 c = b - a
 def A_motor_dir():
-        if A_motor_velocity > 0:
+        if A_motor_velocity >= 0:
                  A_motor_dir = 1
                  A_motor_speed = abs(A_motor_velocity)/100
                  if A_motor_speed > 1:
@@ -51,7 +51,7 @@ def A_motor_dir():
                          A_motor_speed = 1
         Adir.write(A_motor_dir)
 def B_motor_dir():
-        if B_motor_velocity > 0:
+        if B_motor_velocity >= 0:
                  B_motor_dir = 1
                  B_motor_speed = abs(B_motor_velocity)/100
                  if B_motor_speed > 1:
@@ -64,7 +64,7 @@ def B_motor_dir():
                          B_motor_speed = 1
         Bdir.write(B_motor_dir)
 def C_motor_dir():
-        if C_motor_velocity > 0:
+        if C_motor_velocity >= 0:
                  C_motor_dir = 1
                  C_motor_speed = abs(C_motor_velocity)/100
                  if C_motor_speed > 1:
@@ -77,7 +77,7 @@ def C_motor_dir():
                          C_motor_speed = 1
         Cdir.write(C_motor_dir)
 def D_motor_dir():
-        if D_motor_velocity > 0:
+        if D_motor_velocity >= 0:
                  D_motor_dir = 1
                  D_motor_speed = abs(D_motor_velocity)/100
                  if D_motor_speed > 1:
@@ -91,15 +91,16 @@ def D_motor_dir():
         Ddir.write(D_motor_dir)
 def roll_control():
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
-        A_motor_velocity = P*GYRz + A_motor_velocity
-        B_motor_velocity = P*GYRz + B_motor_velocity
-        C_motor_velocity = P*GYRz + C_motor_velocity
-        D_motor_velocity = P*GYRz + D_motor_velocity
-        
+
         A_motor_dir()
         B_motor_dir()
         C_motor_dir()
         D_motor_dir()
+        
+        A_motor_velocity = P*GYRz + A_motor_velocity
+        B_motor_velocity = P*GYRz + B_motor_velocity
+        C_motor_velocity = P*GYRz + C_motor_velocity
+        D_motor_velocity = P*GYRz + D_motor_velocity
         
         Apwm.write(A_motor_speed)
         Bpwm.write(B_motor_speed)
