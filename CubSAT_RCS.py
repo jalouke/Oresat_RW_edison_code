@@ -95,6 +95,7 @@ def D_motor_dir():
         Ddir.write(D_motor_dir)
 def roll_control():
         global A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity
+        global ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
         
         A_motor_velocity = P*GYRz + A_motor_velocity
