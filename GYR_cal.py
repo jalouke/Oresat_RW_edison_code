@@ -3,7 +3,7 @@ import smbus
 import time
 import math
 import numpy as np
-from scipy.signal import butter, lfilter, freqz
+import scipy.signal as signal
 from LSM9DS0 import *
 
 bus = smbus.SMBus(1)
@@ -107,21 +107,23 @@ writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 ################################
-def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs
-    normal_cutoff = cutoff / nyq
-    b, a = butter(order, normal_cutoff, btype='low', analog=False)
-    return b, a
-
-def butter_lowpass_filter(data, cutoff, fs, order=5):
-    b, a = butter_lowpass(cutoff, fs, order=order)
-    y = lfilter(b, a, data)
-    return y
-
 # Filter requirements.
 order = 6
 fs = 95       # sample rate, Hz
 cutoff = 5  # desired cutoff frequency of the filter, Hz
+B,A = signal.butter(order,cutoff,output='ba')
+##def butter_lowpass(cutoff, fs, order=5):
+##    nyq = 0.5 * fs
+##    normal_cutoff = cutoff / nyq
+##    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+##    return b, a
+##
+##def butter_lowpass_filter(data, cutoff, fs, order=5):
+##    b, a = butter_lowpass(cutoff, fs, order=order)
+##    y = lfilter(b, a, data)
+##    return y
+
+
 ######################################################
 
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
@@ -132,9 +134,9 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
-	GYRxf = butter_lowpass_filter(GYRx,cutoff,fs,order)
-	GYRyf = butter_lowpass_filter(GYRy,cutoff,fs,order)
-	GYRzf = butter_lowpass_filter(GYRz,cutoff,fs,order)
+	GYRxf = signal.filtfilt(B,A, GYRx)
+	GYRyf = signal.filtfilt(B,A, GYRy)
+	GYRzf = signal.filtfilt(B,A, GYRz)
 	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(G_So*GYRx,G_So*GYRy,G_So*GYRz)
         print "filteredx: %2.1f, filteredy: %2.1f, filteredz: %2.1f" %(G_So*GYRxf,G_So*GYRyf,G_So*GYRzf)
 	bias_totx += GYRx
