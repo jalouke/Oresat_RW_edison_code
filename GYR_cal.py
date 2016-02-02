@@ -109,6 +109,7 @@ writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 ######################################################
 i=x1=x2=x3=x4=x5=0
 def avg_filter(x):
+        global i
         i+=1
         if i==1:
                 x1=x
