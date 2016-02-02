@@ -2,6 +2,7 @@
 import smbus
 import time
 import math
+import sys
 import numpy as np
 import scipy.signal as signal
 from LSM9DS0 import *
