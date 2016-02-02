@@ -120,7 +120,7 @@ def avg_filter(x):
                 x4=x
         elif i==5:
                 x5=x
-        else
+        else:
                 sys.exit()
         y = (x1+x2+x3+x4+x5)/5
         return y
