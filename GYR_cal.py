@@ -108,26 +108,21 @@ writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 ######################################################
-i=x1=x2=x3=x4=x5=0
-def avg_filter(x):
-        global i,x1,x2,x3,x4,x5
-        i+=1
-        if i==1:
-                x1=x
-        elif i==2:
-                x2=x
-        elif i==3:
-                x3=x
-        elif i==4:
-                x4=x
-        elif i==5:
-                x5=x
-        else:
-                sys.exit()
-        y = (x1+x2+x3+x4+x5)/5
-        return y
 
+def butter_lowpass(cutoff, fs, order=5):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
+def butter_lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
 ######################################################
+order = 6
+fs = 25       # sample rate, Hz
+cutoff = 2    # desired cutoff frequency of the filter, Hz
 
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
@@ -137,9 +132,9 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
-	GYRxf = avg_filter(GYRx)
-	GYRyf = avg_filter(GYRy)
-	GYRzf = avg_filter(GYRz)
+	GYRxf = butter_lowpass_filter(GYRx,cutoff, fs, order)
+	GYRyf = butter_lowpass_filter(GYRy,cutoff, fs, order)
+	GYRzf = butter_lowpass_filter(GYRz,cutoff, fs, order)
 	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(G_So*GYRx,G_So*GYRy,G_So*GYRz)
         print "filteredx: %2.1f, filteredy: %2.1f, filteredz: %2.1f" %(G_So*GYRxf,G_So*GYRyf,G_So*GYRzf)
 	bias_totx += GYRx
