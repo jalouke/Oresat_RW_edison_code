@@ -132,9 +132,9 @@ while timer<15:
 	GYRx = readGYRx()- GYRx_bias
 	GYRy = readGYRy()- GYRy_bias
 	GYRz = readGYRz()- GYRz_bias
-	GYRxf = butter_lowpass_filter(GYRx,cutoff, fs, order)
-	GYRyf = butter_lowpass_filter(GYRy,cutoff, fs, order)
-	GYRzf = butter_lowpass_filter(GYRz,cutoff, fs, order)
+##	GYRxf = butter_lowpass_filter(GYRx,cutoff, fs, order)
+##	GYRyf = butter_lowpass_filter(GYRy,cutoff, fs, order)
+##	GYRzf = butter_lowpass_filter(GYRz,cutoff, fs, order)
 	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f" %(G_So*GYRx,G_So*GYRy,G_So*GYRz)
         print "filteredx: %2.1f, filteredy: %2.1f, filteredz: %2.1f" %(G_So*GYRxf,G_So*GYRyf,G_So*GYRzf)
 	bias_totx += GYRx
