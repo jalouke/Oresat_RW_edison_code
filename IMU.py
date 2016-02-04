@@ -107,7 +107,7 @@ writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 
 #initialise the gyroscope
 writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12.5 cutoff)
-writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
+writeGRY(CTRL_REG2_G, 0b00101000) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 
 def read():
