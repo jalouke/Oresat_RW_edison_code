@@ -108,7 +108,6 @@ writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 ######################################################
-
 def butter_lowpass(cutoff, fs, order):
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
@@ -134,7 +133,6 @@ def floating_array_filter(b,a,in_window,out_window,in_temp):
 	out_window.append(out_temp)
 	out_window.pop(0)
 	return out_temp, out_window, in_window
-
 ######################################################
 order = 2
 fs = 95       # sample rate, Hz

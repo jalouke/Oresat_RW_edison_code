@@ -122,7 +122,7 @@ def roll_control(in_x_window,out_x_window,in_y_window,out_y_window,in_z_window,o
         global A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity
         global ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
-        GYRz, out_z_window, in_z_window = floating_array_filter(b,a,in_z_window,out_z_window,(readGYRz()- GYRz_bias))
+        GYRz, out_z_window, in_z_window = floating_array_filter(b,a,in_z_window,out_z_window,GYRz)
 	
         A_motor_velocity = P*GYRz + A_motor_velocity
         B_motor_velocity = P*GYRz + B_motor_velocity
