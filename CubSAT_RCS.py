@@ -3,6 +3,7 @@ import mraa
 import time 
 import math
 import numpy as np
+import scipy.signal as signal
 import IMU
 
 ##################################################
