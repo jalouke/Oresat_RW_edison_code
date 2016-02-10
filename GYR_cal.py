@@ -136,9 +136,9 @@ def floating_array_filter(b,a,in_window,out_window,in_temp):
 	return out_temp, out_window, in_window
 
 ######################################################
-order = 6
+order = 2
 fs = 95       # sample rate, Hz
-cutoff = 20    # desired cutoff frequency of the filter, Hz
+cutoff = 15    # desired cutoff frequency of the filter, Hz
 b,a = butter_lowpass(cutoff, fs, order)
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
