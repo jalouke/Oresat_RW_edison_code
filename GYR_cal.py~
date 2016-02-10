@@ -117,7 +117,7 @@ def butter_lowpass(cutoff, fs, order):
 
 def manual_filt_low(b,a,data_in,data_out):
 	n = len(b)-1
-	print n, data_in, b[0], a,a[0]
+	print n, data_in, b, a
 	out = b[0]*data_in[n]/a[0]
 	n-=1
 	for x in range(n+1):
@@ -130,10 +130,10 @@ def manual_filt_low(b,a,data_in,data_out):
 def floating_array_filter(b,a,in_window,out_window,in_temp):
 	in_window.append(in_temp)
 	in_window.pop(0)
-	out_n = manual_filt_low(b,a,in_window,out_window)
-	out_window.append(out_n)
+	out_temp = manual_filt_low(b,a,in_window,out_window)
+	out_window.append(out_temp)
 	out_window.pop(0)
-	return out_n, out_window, in_window
+	return out_temp, out_window, in_window
 
 ######################################################
 order = 3

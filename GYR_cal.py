@@ -117,7 +117,7 @@ def butter_lowpass(cutoff, fs, order):
 
 def manual_filt_low(b,a,data_in,data_out):
 	n = len(b)-1
-	print n, data_in, b[0], a,a[0]
+	print n, data_in, b, a
 	out = b[0]*data_in[n]/a[0]
 	n-=1
 	for x in range(n+1):
@@ -150,7 +150,7 @@ out_y_window = [0.0]*(len(a))
 in_z_window = [0.0]*(len(b))
 out_z_window = [0.0]*(len(a))
 while timer<15:
-        a=time.time()
+        t_a=time.time()
 	GYRx, out_x_window, in_x_window = floating_array_filter(b,a,in_x_window,out_x_window,(readGYRx()- GYRx_bias))
 	GYRy, out_y_window, in_y_window = floating_array_filter(b,a,in_y_window,out_y_window,(readGYRy()- GYRy_bias))
 	GYRz, out_z_window, in_z_window = floating_array_filter(b,a,in_z_window,out_z_window,(readGYRz()- GYRz_bias))
@@ -159,8 +159,8 @@ while timer<15:
 	bias_totz += GYRz
 	count+=1
 	timer=time.time()-start
-	b=time.time()
-	t = b-a
+	t_b=time.time()
+	t = t_b-t_a
 	t_tot+=t
 	print "GYRx: %2.1f, GYRy: %2.1f, GYRz: %2.1f, loop time: %2.4f" %(GYRx,GYRy,GYRz,t)
 	
