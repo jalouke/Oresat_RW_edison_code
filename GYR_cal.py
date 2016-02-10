@@ -117,13 +117,13 @@ def butter_lowpass(cutoff, fs, order):
 
 def manual_filt_low(b,a,data_in,data_out):
 	n = len(b)-1
-	print n, data_in, b, a
+	#print n, data_in, b, a
 	out = b[0]*data_in[n]/a[0]
 	n-=1
 	for x in range(n+1):
 		out += b[x+1]*data_in[n]/a[0]
 		out -= a[x+1]*data_out[n]/a[0]
-		print n,x+1, out, a[x+1], b[x+1]
+		#print n,x+1, out, a[x+1], b[x+1]
 		n-=1
 	return out
 
