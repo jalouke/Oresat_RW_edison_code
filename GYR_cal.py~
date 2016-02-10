@@ -121,7 +121,7 @@ def manual_filt_low(b,a,data_in,data_out):
 		n-=1
 	return out
 
-def floating_array_filter(in_window,in_temp)
+def floating_array_filter(in_window,in_temp):
 	in_window.append(in_temp)
 	in_window.pop(0)
 	out_n = manual_filt_low(b,a,in_temp,out_temp)
