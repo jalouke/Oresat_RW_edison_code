@@ -109,6 +109,12 @@ writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 ######################################################
 
+def butter_lowpass(cutoff, fs, order):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = signal.butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
 def manual_filt_low(b,a,data_in,data_out):
 	n = len(b)-1
 	print n, data_in, b[0], a,a[0]
@@ -133,7 +139,7 @@ def floating_array_filter(in_window,in_temp):
 order = 3
 fs = 25       # sample rate, Hz
 cutoff = 20    # desired cutoff frequency of the filter, Hz
-
+b,a = butter_lowpass(cutoff, fs, order)
 count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
 start=time.time()
 timer=t_tot=0
