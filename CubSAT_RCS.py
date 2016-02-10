@@ -11,7 +11,7 @@ import IMU
 
 A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
 A=B=C=D=E=F=G=H=I=0
-P = 0.45 # proportional control value
+P = 0.3 # proportional control value
 timer = 1
 output = [A,B,C,D,E,F,G,H,I]
 Pin = [14,20,0,21,36,48,47,33,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
