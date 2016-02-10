@@ -127,10 +127,10 @@ def manual_filt_low(b,a,data_in,data_out):
 		n-=1
 	return out
 
-def floating_array_filter(in_window,out_window,in_temp):
+def floating_array_filter(b,a,in_window,out_window,in_temp):
 	in_window.append(in_temp)
 	in_window.pop(0)
-	out_n = manual_filt_low(b,a,in_temp,out_window)
+	out_n = manual_filt_low(b,a,in_window,out_window)
 	out_window.append(out_n)
 	out_window.pop(0)
 	return out_n, out_window, in_window
@@ -151,9 +151,9 @@ in_z_window = [0.0]*(len(b))
 out_z_window = [0.0]*(len(a))
 while timer<15:
         a=time.time()
-	GYRx, out_x_window, in_x_window = floating_array_filter(in_x_window,out_x_window,(readGYRx()- GYRx_bias))
-	GYRy, out_y_window, in_y_window = floating_array_filter(in_y_window,out_y_window,(readGYRy()- GYRy_bias))
-	GYRz, out_z_window, in_z_window = floating_array_filter(in_z_window,out_z_window,(readGYRz()- GYRz_bias))
+	GYRx, out_x_window, in_x_window = floating_array_filter(b,a,in_x_window,out_x_window,(readGYRx()- GYRx_bias))
+	GYRy, out_y_window, in_y_window = floating_array_filter(b,a,in_y_window,out_y_window,(readGYRy()- GYRy_bias))
+	GYRz, out_z_window, in_z_window = floating_array_filter(b,a,in_z_window,out_z_window,(readGYRz()- GYRz_bias))
 	bias_totx += GYRx
 	bias_toty += GYRy
 	bias_totz += GYRz

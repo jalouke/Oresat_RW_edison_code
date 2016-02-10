@@ -130,10 +130,10 @@ def manual_filt_low(b,a,data_in,data_out):
 def floating_array_filter(b,a,in_window,out_window,in_temp):
 	in_window.append(in_temp)
 	in_window.pop(0)
-	out_n = manual_filt_low(b,a,in_temp,out_window)
-	out_window.append(out_n)
+	out_temp = manual_filt_low(b,a,in_window,out_window)
+	out_window.append(out_temp)
 	out_window.pop(0)
-	return out_n, out_window, in_window
+	return out_temp, out_window, in_window
 
 ######################################################
 order = 3
