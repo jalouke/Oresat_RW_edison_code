@@ -12,10 +12,10 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.00875 # dps/LSB (2000dps)
-GYRx_bias = 79.7
-GYRy_bias = -95.3
-GYRz_bias = -26.2
-timestart = time.time()
+GYRx_bias = 0
+GYRy_bias = 0
+GYRz_bias = 0
+
 
 def writeACC(register,value):
         bus.write_byte_data(ACC_ADDRESS , register, value)
@@ -107,51 +107,14 @@ writeMAG(CTRL_REG7_XM, 0b00000000) #Continuous-conversion mode
 writeGRY(CTRL_REG1_G, 0b00001111) #Normal power mode, all axes enabled (95 Hz 12.5 cutoff)
 writeGRY(CTRL_REG2_G, 0b00100001) #High-pass filter: Normal mode, 13.5 Hz
 writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
-######################################################
-def butter_lowpass(cutoff, fs, order):
-    nyq = 0.5 * fs
-    normal_cutoff = cutoff / nyq
-    b, a = signal.butter(order, normal_cutoff, btype='low', analog=False)
-    return b, a
 
-def manual_filt_low(b,a,data_in,data_out):
-	n = len(b)-1
-	#print n, data_in, b, a
-	out = b[0]*data_in[n]/a[0]
-	n-=1
-	for x in range(n+1):
-		out += b[x+1]*data_in[n]/a[0]
-		out -= a[x+1]*data_out[n]/a[0]
-		#print n,x+1, out, a[x+1], b[x+1]
-		n-=1
-	return out
-
-def floating_array_filter(b,a,in_window,out_window,in_temp):
-	in_window.append(in_temp)
-	in_window.pop(0)
-	out_temp = manual_filt_low(b,a,in_window,out_window)
-	out_window.append(out_temp)
-	out_window.pop(0)
-	return out_temp, out_window, in_window
-######################################################
-order = 2
-fs = 95       # sample rate, Hz
-cutoff = 15    # desired cutoff frequency of the filter, Hz
-b,a = butter_lowpass(cutoff, fs, order)
-count=bias_totx=bias_toty=bias_totz=biasx=biasy=biasz=0
-start=time.time()
-timer=t_tot=0
-in_x_window = [0.0]*(len(b))
-out_x_window = [0.0]*(len(a))
-in_y_window = [0.0]*(len(b))
-out_y_window = [0.0]*(len(a))
-in_z_window = [0.0]*(len(b))
-out_z_window = [0.0]*(len(a))
+start = time.time()
+count = 0
 while timer<15:
         t_a=time.time()
-	GYRx, out_x_window, in_x_window = floating_array_filter(b,a,in_x_window,out_x_window,(readGYRx()- GYRx_bias))
-	GYRy, out_y_window, in_y_window = floating_array_filter(b,a,in_y_window,out_y_window,(readGYRy()- GYRy_bias))
-	GYRz, out_z_window, in_z_window = floating_array_filter(b,a,in_z_window,out_z_window,(readGYRz()- GYRz_bias))
+	GYRx = readGYRx()
+	GYRy = readGYRy()
+	GYRz = readGYRz()
 	bias_totx += GYRx
 	bias_toty += GYRy
 	bias_totz += GYRz
@@ -170,4 +133,4 @@ avg_t = t_tot/count
 print "GYRx bias = %3.1f" % (biasx)
 print "GYRy bias = %3.1f" % (biasy)
 print "GYRz bias = %3.1f" % (biasz)
-print "average lp time = %1.5f" % (avg_t)
+print "average lp time (ms) = %1.5f" % (avg_t)
