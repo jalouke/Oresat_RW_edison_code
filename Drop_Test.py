@@ -105,7 +105,7 @@ def roll_control():
         Bpwm.write(B_motor_speed)
         Cpwm.write(C_motor_speed)
         Dpwm.write(D_motor_speed)
-	t=time.time()
+	t=float(time.time())
 	Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
 
 filename = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -125,7 +125,7 @@ while True:
         		Cpwm.write(25)
         		Dpwm.write(25)
 			[ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
-			t=time.time()
+			t=float(time.time())
 			Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
 			timer = time.time() - timestart
 		roll_control()
