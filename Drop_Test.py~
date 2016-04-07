@@ -103,9 +103,10 @@ def roll_control():
         
         Apwm.write(A_motor_speed)
         Bpwm.write(B_motor_speed)
-        Cpwm.write(C_motor_speed)
+        Cpwm.write(C_motor_speed)time.time()
         Dpwm.write(D_motor_speed)
-	Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (time.time(),ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
+	t=time.time()
+	Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
 
 filename = time.strftime("%Y-%m-%d %H:%M:%S")
 Data = open(filename.__add__('CubeSat_Drop.txt'), 'a')
@@ -124,7 +125,8 @@ while True:
         		Cpwm.write(25)
         		Dpwm.write(25)
 			[ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
-			Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (time.time(),ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
+			t=time.time()
+			Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
 			timer = time.time() - timestart
 		roll_control()
         Adir.write(0)

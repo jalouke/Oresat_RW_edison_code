@@ -103,7 +103,7 @@ def roll_control():
         
         Apwm.write(A_motor_speed)
         Bpwm.write(B_motor_speed)
-        Cpwm.write(C_motor_speed)time.time()
+        Cpwm.write(C_motor_speed)
         Dpwm.write(D_motor_speed)
 	t=time.time()
 	Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
