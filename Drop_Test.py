@@ -84,7 +84,7 @@ def D_motor_dir():
                          D_motor_speed = 1
         Ddir.write(D_motor_dir)
 
-def roll_control:
+def roll_control():
 	t_a=time.time()
 	
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
