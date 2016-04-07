@@ -6,7 +6,7 @@ import numpy as np
 import scipy.signal as signal
 import IMU
 
-##################################################
+#########################################################
 # initializing Variables
 
 A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
@@ -16,7 +16,7 @@ timer = 1
 output = [A,B,C,D,E,F,G,H,I]
 Pin = [14,20,0,21,36,48,47,33,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
 
-######################################################
+##########################################################
 # enabling outputs 
 for x in xrange(0,4):
 	output[x] = mraa.Pwm(Pin[x])
@@ -30,6 +30,7 @@ for x in xrange(4,9):
 [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode] = output
 output[8].write(1) #Set mode pin to high for pwm/direction
 
+###########################################################
 def A_motor_dir():
         global A_motor_speed
         if A_motor_velocity >= 0:
@@ -82,7 +83,8 @@ def D_motor_dir():
                  if D_motor_speed > 1:
                          D_motor_speed = 1
         Ddir.write(D_motor_dir)
-def roll_control:
+
+def roll_control():
 	t_a=time.time()
 	
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
@@ -131,16 +133,3 @@ while True:
        	Bpwm.write(0)
        	Cpwm.write(0)
        	Dpwm.write(0)
-
-
-
-
-
-
-
-
-
-
-
-
-        
