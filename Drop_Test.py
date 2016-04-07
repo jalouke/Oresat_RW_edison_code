@@ -124,7 +124,7 @@ while True:
 			[ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
 			Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n') % (time.time(),ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz)
 			timer = time.time() - timestart
-		[GYRz,A_motor_velocity,B_motor_velocity,C_motor_velocity,D_motor_velocity]=roll_control()
+		roll_control()
         Adir.write(0)
 	Bdir.write(0)
 	Cdir.write(0)
