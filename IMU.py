@@ -8,9 +8,9 @@ bus = smbus.SMBus(1)
 LA_So = .000732 # g/LSB (16g)
 M_GN = 0.48 # mgauss/LSB (12 gauss)
 G_So = 0.00875 # dps/LSB (2000dps)
-GYRx_offset = 80
-GYRy_offset = -95
-GYRz_offset = -26
+GYRx_offset = 109.08
+GYRy_offset = -157.11
+GYRz_offset = -124.2
 timestart = time.time()
 MAGx_bias = -18.0000
 MAGx_scale = 1.0578
@@ -112,8 +112,8 @@ writeGRY(CTRL_REG4_G, 0b00000000) #Continuos update, 245 dps full scale
 
 
 def read():
+	global MAGx_scale,MAGy_scale,MAGz_scale,MAGx_bias,MAGy_bias,MAGz_bias,GYRx_offset,GYRy_offset,GYRz_offset
 	a = time.time()
-	global ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz
 	ACCx = LA_So*readACCx()
 	ACCy = LA_So*readACCy()
 	ACCz = LA_So*readACCz()
