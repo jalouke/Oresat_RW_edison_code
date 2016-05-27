@@ -103,6 +103,7 @@ def freq_response(Frequency,timestart):
         t = time.time()-timestart
         Z_velocity = np.sin(Frequency*t*pi*2)
         [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=Cardinal_axis*Card_to_Motor
+        print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
         return A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
 Data = open(('Drop_Test/CubeSat_Drop').__add__(filename).__add__('.csv'), 'a')
