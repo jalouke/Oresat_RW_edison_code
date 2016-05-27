@@ -117,6 +117,6 @@ while True:
                 C_motor(C_motor_velocity)
                 D_motor(D_motor_velocity)
                 Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity))
-        if phase == 2 & ACCz <-.9:
+        if phase == 2 and ACCz <-.9:
                 shutdown()
                 
