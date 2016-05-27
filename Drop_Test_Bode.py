@@ -21,6 +21,7 @@ c_c = 1/(np.cos(53*pi/180)*4) #transformation coefficient #3
 Card_to_Motor = np.array([[c_a,c_b,c_c],[c_a,-c_b,c_c],[-c_a,-c_b,c_c],[-c_a,c_b,c_c]]) #cubesat reference frame to motor reference frame conversion (3x4)
 Cardinal_axis = np.array([[X_velocity,Y_velocity,Z_velocity]])
 phase=0
+t=0
 ##########################################################
 # enabling outputs 
 for x in xrange(0,4):
@@ -111,6 +112,7 @@ while True:
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
         timestart = time.time()
         while ACCz > -.8:
+                t = time.time()-timestart
                 phase = 2
                 [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity] = freq_response(Frequency,timestart)
                 A_motor(A_motor_velocity)
