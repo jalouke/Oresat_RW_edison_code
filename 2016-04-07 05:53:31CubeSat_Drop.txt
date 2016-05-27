@@ -1,1 +1,0 @@
-Time,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz
