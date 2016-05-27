@@ -19,7 +19,6 @@ c_a = np.sin(45*pi/180)/2 #transformation coefficient #1
 c_b = np.sin(45*pi/180)/2 #transformation coefficient #2
 c_c = 1/(np.cos(53*pi/180)*4) #transformation coefficient #3
 Card_to_Motor = [[c_a,c_b,c_c],[c_a,-c_b,c_c],[-c_a,-c_b,c_c],[-c_a,c_b,c_c]] #cubesat reference frame to motor reference frame conversion (3x4)
-Cardinal_axis = [[X_velocity],[Y_velocity],[Z_velocity]]
 phase=0
 t=0
 ##########################################################
@@ -102,7 +101,7 @@ def shutdown():
 def freq_response(Frequency,timestart):
         t = time.time()-timestart
         Z_velocity = np.sin(Frequency*t*pi*2)
-        [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,Cardinal_axis)
+        [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,[[X_velocity],[Y_velocity],[Z_velocity]])
         return A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
 Data = open(('Drop_Test/CubeSat_Drop').__add__(filename).__add__('.csv'), 'a')
