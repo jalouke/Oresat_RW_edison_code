@@ -18,8 +18,8 @@ pi = 3.1415926
 c_a = np.sin(45*pi/180)/2 #transformation coefficient #1
 c_b = np.sin(45*pi/180)/2 #transformation coefficient #2
 c_c = 1/(np.cos(53*pi/180)*4) #transformation coefficient #3
-Card_to_Motor = np.array([[c_a,c_b,c_c],[c_a,-c_b,c_c],[-c_a,-c_b,c_c],[-c_a,c_b,c_c]]) #cubesat reference frame to motor reference frame conversion (3x4)
-Cardinal_axis = np.array([[X_velocity],[Y_velocity],[Z_velocity]])
+Card_to_Motor = [[c_a,c_b,c_c],[c_a,-c_b,c_c],[-c_a,-c_b,c_c],[-c_a,c_b,c_c]] #cubesat reference frame to motor reference frame conversion (3x4)
+Cardinal_axis = [[X_velocity],[Y_velocity],[Z_velocity]]
 phase=0
 t=0
 ##########################################################
