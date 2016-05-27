@@ -49,6 +49,7 @@ def A_motor(A_motor_velocity):
                          A_motor_speed = 1
         Adir.write(A_motor_dir)
         Apwm.write(A_motor_speed)
+        print A_motor_dir,A_motor_speed
 def B_motor(B_motor_velocity):
         if B_motor_velocity >= 0:
                  B_motor_dir = 1
@@ -118,6 +119,7 @@ while True:
                 B_motor(B_motor_velocity)
                 C_motor(C_motor_velocity)
                 D_motor(D_motor_velocity)
+                print A_motor_velocity
                 Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity))
         if phase == 2 and ACCz <-.9:
                 shutdown()
