@@ -102,8 +102,10 @@ def shutdown():
 def freq_response(Frequency,timestart):
         t = time.time()-timestart
         Z_velocity = np.sin(Frequency*t*pi*2)
+	print Cardinal_axis
+	print Card_to_Motor
         [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Cardinal_axis,Card_to_Motor)
-        print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
+	print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
         return A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
 Data = open(('Drop_Test/CubeSat_Drop').__add__(filename).__add__('.csv'), 'a')
