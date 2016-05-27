@@ -102,7 +102,7 @@ def shutdown():
 def freq_response(Frequency,timestart):
         t = time.time()-timestart
         Z_velocity = np.sin(Frequency*t*pi*2)
-        [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Cardinal_axis,Card_to_Motor)
+        [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,Cardinal_axis)
         print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
         return A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
