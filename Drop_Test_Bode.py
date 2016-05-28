@@ -102,6 +102,7 @@ def shutdown():
 def freq_response(Frequency,timestart):
         t = time.time()-timestart
         Z_velocity = np.sin(Frequency*t*pi*2)
+        print t,Z_velocity
         [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,[[X_velocity],[Y_velocity],[Z_velocity]])
         return A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
@@ -121,6 +122,6 @@ while True:
                 D_motor(D_motor_velocity)
                 print A_motor_velocity
                 Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity))
-        if phase == 2 and ACCz <-.9:
+        if phase == 2 and ACCz <-.8:
                 shutdown()
                 
