@@ -117,11 +117,11 @@ while True:
                 phase = 2
                 [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity] = freq_response(Frequency,timestart)
                 print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
-                A_motor(A_motor_velocity)
-                B_motor(B_motor_velocity)
-                C_motor(C_motor_velocity)
-                D_motor(D_motor_velocity)
-                print A_motor_velocity
+                A_motor(A_Motor_velocity)
+                B_motor(B_Motor_velocity)
+                C_motor(C_Motor_velocity)
+                D_motor(D_Motor_velocity)
+                print A_Motor_velocity
                 Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity))
         if phase == 2 and ACCz <-.8:
                 shutdown()
