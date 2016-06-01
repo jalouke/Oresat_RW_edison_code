@@ -9,13 +9,12 @@ Cardinal_axis = [[X_velocity],[Y_velocity],[Z_velocity]]
 
 [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity] = np.dot(Card_to_Motor,Cardinal_axis)
 
-alpha = float (A_Motor_velocity)
-bravo = float (B_Motor_velocity)
-charlie = float (C_Motor_velocity)
-delta = float (D_Motor_velocity)
+A_Motor_velocity= float (A_Motor_velocity)
+B_Motor_velocity= float (B_Motor_velocity)
+C_Motor_velocity= float (C_Motor_velocity)
+D_Motor_velocity= float (D_Motor_velocity)
 
-print alpha
-print bravo
-print charlie
-print delta
-
+print (A_Motor_velocity)
+print (B_Motor_velocity)
+print (C_Motor_velocity)
+print (D_Motor_velocity)
