@@ -112,7 +112,7 @@ Data.write('Time,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_vel
 while True:
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
         timestart = time.time()
-	print Accz
+	print ACCz
         while ACCz > -.8:
                 t = time.time()-timestart
                 phase = 2
