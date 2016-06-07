@@ -121,8 +121,8 @@ def roll_control():
                 Dpwm.write(0) 
                 sys.exit() 
 
-filename = time.strftime("%Y-%m-%d_%H:%M:%S")
-Data = open(('Drop_Test/CubeSat_Drop').__add__(filename).__add__('.txt'), 'a')
+filename = time.strftime("%Y-%m-%d_%H-%M-%S")
+Data = open(('Drop_Test/CubeSat_Drop').__add__(filename).__add__('.csv'), 'a')
 Data.write('Time,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,Motor_Speed\n')
 timestart = time.time()
 while True:

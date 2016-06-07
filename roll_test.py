@@ -8,7 +8,7 @@ RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
 Apwm=Bpwm=Cpwm=Dpwm=Adir=Bdir=Cdir=Ddir=mode=0 
 output = [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode] 
-Pin = [14,20,0,21,36,48,47,32,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP48,GP47
+Pin = [14,20,0,21,36,48,47,32,46] #PWM for GP13,GP12,GP182,GP183 Gpio for GP14,GP15,GP49,GP46,GP47
 
 for x in xrange(0,4):
 	output[x] = mraa.Pwm(Pin[x])
