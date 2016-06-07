@@ -101,7 +101,7 @@ def shutdown():
         sys.exit() 
 def freq_response(Frequency,timestart):
         t = time.time()-timestart
-        Z_velocity = np.sin(Frequency*t*pi*2)
+        Z_velocity = 2.41*np.sin(Frequency*t*pi*2)
         #print t,Z_velocity
         [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,[[X_velocity],[Y_velocity],[Z_velocity]])
         return float(A_Motor_velocity),float(B_Motor_velocity),float(C_Motor_velocity),float(D_Motor_velocity)
