@@ -114,6 +114,7 @@ while True:
         timestart = time.time()
 	print ACCz
         while ACCz > -.8:
+        	[ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
                 t = time.time()-timestart
                 phase = 2
                 [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity] = freq_response(Frequency,timestart)

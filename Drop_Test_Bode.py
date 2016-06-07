@@ -8,7 +8,7 @@ import sys
 
 #########################################################
 # initializing Variables
-Frequency = 1 #frequency of input response in Hz
+Frequency = .1 #frequency of input response in Hz
 A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
 X_velocity=Y_velocity=Z_velocity=0
 A=B=C=D=E=F=G=H=I=0
@@ -49,7 +49,7 @@ def A_motor(A_motor_velocity):
                          A_motor_speed = 1
         Adir.write(A_motor_dir)
         Apwm.write(A_motor_speed)
-        print A_motor_dir,A_motor_speed
+        #print A_motor_dir,A_motor_speed
 def B_motor(B_motor_velocity):
         if B_motor_velocity >= 0:
                  B_motor_dir = 1
