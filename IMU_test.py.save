@@ -1,0 +1,36 @@
+#import smbus
+import time
+import math
+import sys
+import IMU
+GYRx_offset=0
+GYRy_offset=0
+GYRz_offset=0
+filename = time.strftime("%Y-%m-%d_%H:%M:%S")
+Data = open(('CubeSat_Drop').__add__(filename).__add__('.txt'), 'a')
+Data.write('Time,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz\n')
+start_time = time.time()
+t=0
+count = 0
+while t<25:
+        [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read(GYRx_offset,GYRy_offset,GYRz_offset)
+	count += 1
+        print ("\033[1;34;40mAcceleration Values:")
+        print ("\033[1;34;40mACCX %5.4f, ACCy %5.4f, ACCz %5.4f" % (ACCx, ACCy, ACCz))
+        print ("\033[1;31;40mGyro Values:")
+        print ("\033[1;31;40mGYRx %5.2f, GYRy %5.2f, GYRz %5.2f" % (GYRx, GYRy, GYRz))
+        print ("\033[1;35;40mMagnetometer values:")
+        print ("\033[1;35;40mMAGx %5.2f, MAGy %5.2f, MAGz %5.2f" % (MAGx, MAGy, MAGz))	
+        time.sleep(0.1)
+	t=time.time()-start_time
+	Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz))
+/count	
+Data.close()
+GRYx_tot += GYRx
+        GRYx_off = GYRx_tot/count
+        GRYy_tot += GYRy
+        GRYy_off = GYRy_tot/count
+        GRYz_tot += GYRz
+        GRYz_off = GYRz_tot/count
+
+

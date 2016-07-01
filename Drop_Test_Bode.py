@@ -1,4 +1,4 @@
-##This code is written to give the CubeSAT a constant angular velocity about the z-axis##
+        ##This code is written to give the CubeSAT a constant angular velocity about the z-axis##
 
 #"System Management Bus", turning on and off?
 import smbus
@@ -16,7 +16,6 @@ import IMU
 import sys
 
 #########################################################
-<<<<<<< HEAD
 #Initializing Variables
 
 #frequency of input response in Hz
@@ -24,10 +23,6 @@ Frequency = 1
 #Proportionality constant
 kp=1
 #motor velocities initially set to zero
-=======
-# initializing Variables
-Frequency = .1 #frequency of input response in Hz
->>>>>>> 14c855b9d5007d1c1b3812761d1052d28c2cc364
 A_motor_velocity=B_motor_velocity=C_motor_velocity=D_motor_velocity=0
 #x,y,z velocities initially set to zero
 X_velocity=Y_velocity=Z_velocity=0
@@ -69,15 +64,10 @@ for x in xrange(4,9):
 	print x, output[x]
 #renaming A-I as the array below
 [Apwm,Bpwm,Cpwm,Dpwm,Adir,Bdir,Cdir,Ddir,mode] = output
-<<<<<<< HEAD
 #Set pin 8 to high for pwm/direction mode. This is the "mode" pin
 output[8].write(1)
 print Apwm
 
-=======
-output[8].write(1) #Set mode pin to high for pwm/direction
-#print Apwm
->>>>>>> 14c855b9d5007d1c1b3812761d1052d28c2cc364
 ###########################################################
 #Makes the sine wave
 def freq_response(Frequency,timestart):
@@ -154,21 +144,11 @@ def shutdown():
         Bpwm.write(0) 
         Cpwm.write(0) 
         Dpwm.write(0) 
-<<<<<<< HEAD
         sys.exit()
 
 #Makes a CSV file
 
 #Formats time/date as a string
-=======
-        sys.exit() 
-def freq_response(Frequency,timestart):
-        t = time.time()-timestart
-        Z_velocity = 2.41*np.sin(Frequency*t*pi*2)
-        #print t,Z_velocity
-        [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity]=np.dot(Card_to_Motor,[[X_velocity],[Y_velocity],[Z_velocity]])
-        return float(A_Motor_velocity),float(B_Motor_velocity),float(C_Motor_velocity),float(D_Motor_velocity)
->>>>>>> 14c855b9d5007d1c1b3812761d1052d28c2cc364
 filename = time.strftime("%Y-%m-%d_%H-%M-%S")
 #Similar (sort of) to addding and then commiting in git
 #"Data =" literally opens ('...') and dumps the file into it (it being Data)
@@ -182,18 +162,16 @@ while True:
         [ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
         #time.time is the current time from the Edison
         timestart = time.time()
-	print ACCz
         while ACCz > -.8:
-        	[ACCx,ACCy,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz] = IMU.read()
                 t = time.time()-timestart
                 state = 2
                 [A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity] = freq_response(Frequency,timestart)
-                #print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
+                print A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity
                 A_motor(A_Motor_velocity)
                 B_motor(B_Motor_velocity)
                 C_motor(C_Motor_velocity)
                 D_motor(D_Motor_velocity)
-                print ACCz
+                print A_Motor_velocity
                 Data.write('%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f,%5.3f\n' % (t,ACCz,GYRx,GYRy,GYRz,MAGx,MAGy,MAGz,A_Motor_velocity,B_Motor_velocity,C_Motor_velocity,D_Motor_velocity))
         if state == 2 and ACCz <-.8:
                 shutdown()
